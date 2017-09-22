@@ -247,7 +247,6 @@ if(BUILD_CLIENT)
     if(NOT BUILD_LIBRARIES_ONLY)
         add_subdirectory(doc)
         add_subdirectory(doc/dev)
-        add_subdirectory(admin)
     endif(NOT BUILD_LIBRARIES_ONLY)
 endif()
 
