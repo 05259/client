@@ -59,8 +59,20 @@ QUrl Updater::addQueryParams(const QUrl &url)
         paramUrl.addQueryItem(QLatin1String("client"), sysInfo);
     }
     paramUrl.addQueryItem(QLatin1String("version"), clientVersion());
+    paramUrl.addQueryItem(QLatin1String("versionstring"), MIRALL_VERSION_STRING);
     paramUrl.addQueryItem(QLatin1String("platform"), platform);
     paramUrl.addQueryItem(QLatin1String("oem"), theme->appName());
+
+    QString suffix = QString::fromLatin1(MIRALL_STRINGIFY(MIRALL_VERSION_SUFFIX));
+    if (suffix.startsWith("nightly")
+            || suffix.startsWith("alpha")
+            || suffix.startsWith("rc")
+            || suffix.startsWith("beta")) {
+        paramUrl.addQueryItem(QLatin1String("channel"), "beta");
+        // FIXME: Provide a checkbox in UI to enable regular versions to switch
+        // to beta channel
+    }
+
     return paramUrl;
 }
 
